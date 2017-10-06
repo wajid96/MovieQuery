@@ -23,28 +23,22 @@ var newMovie = {title: "Baby Driver”, year: “2017", length: 119, rating: "6.
 console.log(addMovie(newMovie));
 
 function movieByRating(){
-  var init = [];
-  for(var i=0; i<movieList.length; i++){
-    for(var j=i; j<movieList.length-1; j++){
-      if(movieList[j].rating<movieList[j+1].rating){
-        init=movieList[j];
-        movieList[j]=movieList[j+1];
-        movieList[j+1]=init;
-      }
-    }
-  }
+  movieList.sort(function(a, b){
+    return (b.rating)-(a.rating);
+  });
   return movieList;
 }
 
 console.log(movieByRating());
 
 function findByTitle( title ){
-  var mov = [];
-  for(var i=0; i<movieList.length; i++){
-    if(title==movieList[i].title)
-    mov = movieList[i];
-  }
-  return mov;
+  var searchedMovie = [];
+  movieList.map(function(movie){
+    if(movie.title.toLowerCase().includes(title)){
+    searchedMovie.push(movie);
+    }
+  });
+  return searchedMovie;
 }
 
 console.log(findByTitle("matrix"));
